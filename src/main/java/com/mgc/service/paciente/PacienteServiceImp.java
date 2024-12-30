@@ -44,6 +44,13 @@ public class PacienteServiceImp implements PacienteService{
     }
 
     @Override
+    public Paciente getPacienteByNombre(String nombre) {
+        return pacienteRepository.findByNombreIgnoreCase(nombre)
+                .orElseThrow(() -> new ResourceNotFoundException("Paciente No Encontrado"));
+    }
+
+
+    @Override
     public PacienteDTO convertirAPacienteDTO(Paciente paciente) {
         return modelMapper.map(paciente, PacienteDTO.class);
     }

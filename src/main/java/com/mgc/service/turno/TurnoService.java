@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface TurnoService {
     Turno registrarTurno(TurnoDTO turnoDTO);
-    List<Turno> getTurnosPaciente(Integer paciente);
+    List<Turno> getTurnosPaciente(String pacienteNombre);
     List<Turno> getTurnosProfesionalYEspecialidad(String profesional, String especialidad);
     Turno modificarTurno(TurnoDTO turnoDTO);
     void cancelarTurno(Integer idTurno);

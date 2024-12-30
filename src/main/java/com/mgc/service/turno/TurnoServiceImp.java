@@ -97,8 +97,8 @@ public class TurnoServiceImp implements TurnoService{
 
 
     @Override
-    public List<Turno> getTurnosPaciente(Integer idPaciente) {
-        return turnoRepository.findAllByPacienteId(idPaciente);
+    public List<Turno> getTurnosPaciente(String pacienteNombre) {
+        return turnoRepository.findAllByPacienteNombreIgnoreCase(pacienteNombre);
     }
 
     @Override
@@ -112,10 +112,14 @@ public class TurnoServiceImp implements TurnoService{
 
         List<Predicate> predicados =new ArrayList<>();
         if (profesional != null){
-            predicados.add(criteriaBuilder.equal(profesionalJoin.get("nombre"), profesional));
+            predicados.add(criteriaBuilder.equal(
+                    criteriaBuilder.lower(profesionalJoin.get("nombre")),
+                    profesional.toLowerCase()));
         }
         if (especialidad != null){
-            predicados.add(criteriaBuilder.equal(especialidadJoin.get("nombre"), especialidad));
+            predicados.add(criteriaBuilder.equal(
+                    criteriaBuilder.lower(especialidadJoin.get("nombre")),
+                    especialidad.toLowerCase()));
         }
         criteriaQuery.select(root).where(criteriaBuilder.and(predicados.toArray(new Predicate[0])));
         return entityManager.createQuery(criteriaQuery).getResultList();

@@ -15,11 +15,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class EspecialidadServiceImp implements EspecialidadService{
-   /* public EspecialidadServiceImp(EspecialidadRepository especialidadRepository, ModelMapper modelMapper) {
-        this.especialidadRepository = especialidadRepository;
-        this.modelMapper = modelMapper;
-    }*/
-
     private final EspecialidadRepository especialidadRepository;
 
     private final ModelMapper modelMapper;

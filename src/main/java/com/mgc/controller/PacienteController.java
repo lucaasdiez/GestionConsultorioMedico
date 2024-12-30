@@ -19,10 +19,10 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class PacienteController {
     private final PacienteService pacienteService;
 
-    @GetMapping("/paciente/{idPaciente}")
-    public ResponseEntity<ApiResponse> getPacienteById(@PathVariable Integer idPaciente){
+    @GetMapping("/paciente")
+    public ResponseEntity<ApiResponse> getPacienteByNombre(@RequestParam String nombre){
         try {
-            Paciente paciente = pacienteService.getPacienteById(idPaciente);
+            Paciente paciente = pacienteService.getPacienteByNombre(nombre);
             PacienteDTO pacienteDTO = pacienteService.convertirAPacienteDTO(paciente);
             return ResponseEntity.ok(new ApiResponse("Paciente", pacienteDTO));
         }catch (ResourceNotFoundException e){

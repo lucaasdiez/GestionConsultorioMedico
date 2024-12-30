@@ -20,10 +20,10 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class TurnoController {
     private final TurnoService turnoService;
 
-    @GetMapping("/paciente/{idPaciente}")
-    public ResponseEntity<ApiResponse> getTurnosPaciente(@PathVariable Integer idPaciente){
+    @GetMapping("/paciente")
+    public ResponseEntity<ApiResponse> getTurnosPaciente(@RequestParam String nombrePaciente){
         try{
-            List<Turno> turnos = turnoService.getTurnosPaciente(idPaciente);
+            List<Turno> turnos = turnoService.getTurnosPaciente(nombrePaciente);
             List<TurnoDTO> turnoDTOS= turnoService.convertirAturnoDTO(turnos);
             return ResponseEntity.ok().body(new ApiResponse("Turnos", turnoDTOS));
         }catch (ResourceNotFoundException e){
